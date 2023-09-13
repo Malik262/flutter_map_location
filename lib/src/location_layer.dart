@@ -32,7 +32,7 @@ class LocationLayer extends StatefulWidget {
 
   final LocationOptions options;
   final MapState map;
-  final Stream<Null> stream;
+  final Stream<void> stream;
 
   @override
   _LocationLayerState createState() => _LocationLayerState();
