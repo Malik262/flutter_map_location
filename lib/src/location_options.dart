@@ -15,23 +15,24 @@ enum LocationServiceStatus {
   unsubscribed,
 }
 
-typedef LocationButtonBuilder = Widget Function(BuildContext context,
-    ValueNotifier<LocationServiceStatus>, Function onPressed);
+typedef LocationButtonBuilder = Widget Function(BuildContext context, ValueNotifier<LocationServiceStatus>, Function onPressed);
 
-typedef LocationMarkerBuilder = Marker Function(
-    BuildContext context, LatLngData ld, ValueNotifier<double?> heading);
+typedef LocationMarkerBuilder = Marker Function(BuildContext context, LatLngData ld, ValueNotifier<double?> heading);
 
-class LocationOptions extends LayerOptions {
-  LocationOptions(this.buttonBuilder,
-      {this.onLocationUpdate,
-      this.onLocationRequested,
-      this.markerBuilder,
-      LocationController? controller,
-      this.updateInterval = const Duration(seconds: 1),
-      this.initiallyRequest = true,
-      this.locationAccuracy = LocationAccuracy.best})
-      : controller = controller ?? LocationControllerImpl(),
-        super();
+class LocationOptions extends TileLayerOptions {
+  LocationOptions(
+    this.buttonBuilder, {
+    Key? key,
+    this.onLocationUpdate,
+    this.onLocationRequested,
+    this.markerBuilder,
+    LocationController? controller,
+    this.updateInterval = const Duration(seconds: 1),
+    this.initiallyRequest = true,
+    this.locationAccuracy = LocationAccuracy.best,
+    Stream<void>? rebuild,
+  })  : controller = controller ?? LocationControllerImpl(),
+        super(key: key, rebuild: rebuild);
 
   /// If the LocationController is provided it can be used to programmatically access
   /// the functions of the plugin.
